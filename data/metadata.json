@@ -1,0 +1,1 @@
+{"users": {"id": {"type": "INT", "primary_key": true}, "name": {"type": "TEXT", "unique": true}}, "posts": {"id": {"type": "INT", "primary_key": true}, "user_id": {"type": "INT"}, "title": {"type": "TEXT"}}, "tasks": {"id": {"type": "INT", "primary_key": true}, "title": {"type": "TEXT"}, "status": {"type": "TEXT"}}}

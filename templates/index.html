@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dope Task Manager</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body { padding: 20px; background-color: #f8f9fa; }
+        .container { max-width: 800px; background: white; padding: 30px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .completed { text-decoration: line-through; color: gray; }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Dope Task Manager</h1>
+        
+        <form action="/add" method="POST" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="title" class="form-control" placeholder="What are we doing today? " required>
+                <button type="submit" class="btn btn-primary">Add Task</button>
+            </div>
+        </form>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Task</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td class="{{ 'completed' if task.status == 'done' else '' }}">{{ task.title }}</td>
+                    <td><span class="badge {{ 'bg-success' if task.status == 'done' else 'bg-warning' }}">{{ task.status }}</span></td>
+                    <td>
+                        {% if task.status != 'done' %}
+                        <a href="/complete/{{ task.id }}" class="btn btn-sm btn-success">Done</a>
+                        {% endif %}
+                        <a href="/delete/{{ task.id }}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
